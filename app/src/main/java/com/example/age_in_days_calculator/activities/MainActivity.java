@@ -1,7 +1,10 @@
-package com.example.age_in_days_calculator;
+package com.example.age_in_days_calculator.activities;
+
+import static com.example.age_in_days_calculator.lib.Utils.showInfoDialog;
 
 import android.os.Bundle;
 
+import com.example.age_in_days_calculator.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -14,6 +17,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 public class MainActivity extends AppCompatActivity {
+
+    private Snackbar mSnackBar;
 
 
 
@@ -48,14 +53,34 @@ public class MainActivity extends AppCompatActivity {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        int itemId = item.getItemId();
+        if (itemId == R.id.action_settings) {
+            showSettings();
+            return true;
+        } else if (itemId == R.id.action_about) {
+            showAbout();
             return true;
         }
-
         return super.onOptionsItemSelected(item);
+    }
+
+    private void showSettings() {
+        /*dismissSnackBarIfShown();
+        Intent intent = new Intent(getApplicationContext(), SettingsActivity.class);
+        settingsLauncher.launch(intent);*/
+    }
+
+    private void showAbout() {
+//        dismissSnackBarIfShown();
+        showInfoDialog(MainActivity.this, "About this calculator",
+                "Enter your birthday to see how many days old you are!\n" +
+                        "\nAndroid app by RB.");
+    }
+
+    private void dismissSnackBarIfShown() {
+        if (mSnackBar.isShown()) {
+            mSnackBar.dismiss();
+        }
     }
 
 
