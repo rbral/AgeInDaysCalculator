@@ -1,13 +1,18 @@
 package com.example.age_in_days_calculator.activities;
 
+import static androidx.preference.PreferenceManager.getDefaultSharedPreferences;
 import static com.example.age_in_days_calculator.lib.Utils.showInfoDialog;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import com.example.age_in_days_calculator.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
@@ -20,6 +25,18 @@ public class MainActivity extends AppCompatActivity {
 
     private Snackbar mSnackBar;
 
+    /*@Override
+    protected void onStop() {
+        super.onStop();
+        saveOrDeleteGameInSharedPrefs();
+    }
+
+    private void saveOrDeleteGameInSharedPrefs() {
+        SharedPreferences defaultSharedPreferences = getDefaultSharedPreferences(this);
+        SharedPreferences.Editor editor = defaultSharedPreferences.edit();
+
+        editor.apply();
+    }*/
 
 
     @Override
@@ -65,9 +82,19 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void showSettings() {
-        /*dismissSnackBarIfShown();
+//        dismissSnackBarIfShown();
         Intent intent = new Intent(getApplicationContext(), SettingsActivity.class);
-        settingsLauncher.launch(intent);*/
+        settingsLauncher.launch(intent);
+    }
+
+    ActivityResultLauncher<Intent> settingsLauncher = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            result -> restoreOrSetFromPreferences_AllAppAndGameSettings());
+
+    private void restoreOrSetFromPreferences_AllAppAndGameSettings() {
+        SharedPreferences sp = getDefaultSharedPreferences(this);
+//        mUseAutoSave = sp.getBoolean(mKEY_AUTO_SAVE, true);
+//        mGame.setWinnerIsLastPlayerToPick(sp.getBoolean(mKEY_WIN_ON_LAST_PICK, false));
     }
 
     private void showAbout() {
@@ -77,11 +104,11 @@ public class MainActivity extends AppCompatActivity {
                         "\nAndroid app by RB.");
     }
 
-    private void dismissSnackBarIfShown() {
+    /*private void dismissSnackBarIfShown() {
         if (mSnackBar.isShown()) {
             mSnackBar.dismiss();
         }
-    }
+    }*/
 
 
 }
