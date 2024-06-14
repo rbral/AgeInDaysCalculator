@@ -13,6 +13,10 @@
         android:theme="@style/Theme.AgeInDaysCalculator"
         tools:targetApi="31">
         <activity
+            android:name=".activities.SettingsActivity"
+            android:exported="false"
+            android:label="@string/title_activity_settings" />
+        <activity
             android:name=".activities.ResultActivity"
             android:exported="false" />
         <activity
