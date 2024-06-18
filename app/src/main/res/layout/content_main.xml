@@ -4,23 +4,23 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
     app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
 <!--    <include layout="@layout/main_include_all" />-->
-    <include layout="@layout/main_include_instruction_bar" />
+<!--    <include layout="@layout/main_include_instruction_bar" />-->
 
     <TextView
         android:id="@+id/type_birthday"
-        android:text="@string/type_birthday"
         style="@style/multi_text_view_style"
-        />
+        android:text="@string/type_birthday" />
 
     <EditText
         android:id="@+id/et_text"
         style="@style/main_edit_text_style"
         android:hint="@string/date_hint"
-        android:inputType="date"
-        />
+        android:inputType="date" />
 
     <TextView
         android:id="@+id/tv_result"

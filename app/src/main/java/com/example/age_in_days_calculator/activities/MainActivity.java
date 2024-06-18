@@ -80,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
         if(!data.isEmpty())
         {
             long ageInDays = calculateAgeInDays(data);
-            mResult.setText((int) ageInDays);
+            mResult.setText(String.valueOf(ageInDays));
             mResult.setVisibility(View.VISIBLE);
         }
         else
