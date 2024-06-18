@@ -20,5 +20,9 @@
     <string name="night_mode_title">Night/Dark Mode</string>
     <string name="night_mode_off">Never use Night/Dark Mode</string>
     <string name="night_mode_on">Use Night/Dark Mode (unless disabled in OS Settings)</string>
+    <string name="type_birthday">Type your birthday below:</string>
+    <string name="initial_result">Your age in days will appear here</string>
+    <string name="date_hint">(yyyy-mm-dd)</string>
+    <string name="error_msg">Error: please enter a valid birthday</string>
 
 </resources>

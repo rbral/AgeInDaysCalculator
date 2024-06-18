@@ -20,10 +20,22 @@ import android.view.View;
 
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
     private Snackbar mSnackBar;
+
+    private EditText mEditTypeText;
+    private TextView mResult;
+    private String result;
 
     /*@Override
     protected void onStop() {
@@ -44,18 +56,63 @@ public class MainActivity extends AppCompatActivity {
     {
         super.onCreate (savedInstanceState);
         setContentView (R.layout.activity_main);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        setupToolbar();
+        setupFAB();
+        setupFields();
+    }
+
+    private void setupFields() {
+        mEditTypeText = findViewById(R.id.et_text);
+        mResult = findViewById(R.id.tv_result);
+    }
+
+    private void setupFAB() {
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override public void onClick (View v) {
-                Snackbar.make (v, "Hello, World!",
-                                Snackbar.LENGTH_LONG)
-                        .setAnchorView (R.id.fab)
-                        .setAction ("Action", null)
-                        .show ();
+                handleFABClick();
             }
         });
+    }
+
+    private void handleFABClick() {
+        String data = mEditTypeText.getText().toString();
+        if(!data.isEmpty())
+        {
+            long ageInDays = calculateAgeInDays(data);
+            mResult.setText((int) ageInDays);
+            mResult.setVisibility(View.VISIBLE);
+        }
+        else
+        {
+            Toast.makeText(getApplicationContext(),
+                    R.string.error_msg,
+                    Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private long calculateAgeInDays(String birthdayString)
+    {
+        long ageInDays = 0;
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
+        try {
+            Date birthdayDate = sdf.parse(birthdayString);
+            Date currentDate = new Date();
+            long diff = currentDate.getTime() - birthdayDate.getTime();
+            ageInDays = diff / (1000 * 60 * 60 * 24);
+        }
+        catch (ParseException e)
+        {
+            e.printStackTrace();
+        }
+        return ageInDays;
+    }
+
+
+
+    private void setupToolbar() {
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
     }
 
     @Override
