@@ -23,8 +23,18 @@
         android:inputType="date" />
 
     <TextView
+        android:id="@+id/tv_result_msg1"
+        android:text="@string/result_msg1"
+        style="@style/multi_text_view_style" />
+
+    <TextView
         android:id="@+id/tv_result"
         android:text="@string/initial_result"
+        style="@style/big_text_view_style" />
+
+    <TextView
+        android:id="@+id/tv_result_msg2"
+        android:text="@string/result_msg2"
         style="@style/multi_text_view_style" />
 
 

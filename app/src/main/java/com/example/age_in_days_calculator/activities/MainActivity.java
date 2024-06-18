@@ -80,14 +80,13 @@ public class MainActivity extends AppCompatActivity {
         if(!data.isEmpty())
         {
             long ageInDays = calculateAgeInDays(data);
-            mResult.setText(String.valueOf(ageInDays));
+            String formattedAgeInDays = String.format(Locale.US, "%,d", ageInDays);
+            mResult.setText(String.valueOf(formattedAgeInDays));
             mResult.setVisibility(View.VISIBLE);
         }
         else
         {
-            Toast.makeText(getApplicationContext(),
-                    R.string.error_msg,
-                    Toast.LENGTH_SHORT).show();
+            showErrorSnackbar();
         }
     }
 
@@ -104,10 +103,16 @@ public class MainActivity extends AppCompatActivity {
         catch (ParseException e)
         {
             e.printStackTrace();
+            showErrorSnackbar();
         }
         return ageInDays;
     }
 
+    private void showErrorSnackbar() {
+        Toast.makeText(getApplicationContext(),
+                R.string.error_msg,
+                Toast.LENGTH_SHORT).show();
+    }
 
 
     private void setupToolbar() {
