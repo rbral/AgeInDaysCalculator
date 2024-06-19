@@ -13,6 +13,7 @@ import com.google.android.material.snackbar.Snackbar;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
@@ -31,11 +32,19 @@ import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Snackbar mSnackBar;
-
+    //fields:
     private EditText mEditTypeText;
     private TextView mResult;
-    private String result;
+
+    //keys used for restore during rotation:
+    private final String mKEY_RESULT = "RESULT";
+
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        outState.putString(mKEY_RESULT, mResult.getText().toString());
+    }
 
     /*@Override
     protected void onStop() {
@@ -59,7 +68,21 @@ public class MainActivity extends AppCompatActivity {
         setupToolbar();
         setupFAB();
         setupFields();
+        doInitialStart(savedInstanceState);
     }
+
+    private void doInitialStart(Bundle savedInstanceState) {
+        if (savedInstanceState != null)
+        {
+            String result = savedInstanceState.getString(mKEY_RESULT);
+            if (result != null && !result.isEmpty()) {
+                mResult.setText(result);
+                mResult.setVisibility(View.VISIBLE);
+            }
+        }
+    }
+
+
 
     private void setupFields() {
         mEditTypeText = findViewById(R.id.et_text);
