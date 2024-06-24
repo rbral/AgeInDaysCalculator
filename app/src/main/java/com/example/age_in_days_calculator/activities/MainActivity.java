@@ -46,20 +46,6 @@ public class MainActivity extends AppCompatActivity {
         outState.putString(mKEY_RESULT, mResult.getText().toString());
     }
 
-    /*@Override
-    protected void onStop() {
-        super.onStop();
-        saveOrDeleteGameInSharedPrefs();
-    }
-
-    private void saveOrDeleteGameInSharedPrefs() {
-        SharedPreferences defaultSharedPreferences = getDefaultSharedPreferences(this);
-        SharedPreferences.Editor editor = defaultSharedPreferences.edit();
-
-        editor.apply();
-    }*/
-
-
     @Override
     protected void onCreate (Bundle savedInstanceState)
     {
@@ -81,8 +67,6 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
-
-
 
     private void setupFields() {
         mEditTypeText = findViewById(R.id.et_text);
@@ -167,7 +151,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void showSettings() {
-//        dismissSnackBarIfShown();
         Intent intent = new Intent(getApplicationContext(), SettingsActivity.class);
         settingsLauncher.launch(intent);
     }
@@ -178,22 +161,15 @@ public class MainActivity extends AppCompatActivity {
 
     private void restoreOrSetFromPreferences_AllAppAndGameSettings() {
         SharedPreferences sp = getDefaultSharedPreferences(this);
-//        mUseAutoSave = sp.getBoolean(mKEY_AUTO_SAVE, true);
-//        mGame.setWinnerIsLastPlayerToPick(sp.getBoolean(mKEY_WIN_ON_LAST_PICK, false));
     }
 
     private void showAbout() {
-//        dismissSnackBarIfShown();
         showInfoDialog(MainActivity.this, "About this calculator",
                 "Enter your birthday to see how many days old you are!\n" +
                         "\nAndroid app by RB.");
     }
 
-    /*private void dismissSnackBarIfShown() {
-        if (mSnackBar.isShown()) {
-            mSnackBar.dismiss();
-        }
-    }*/
+
 
 
 }
