@@ -1,3 +1,4 @@
 <resources>
     <dimen name="fab_margin">16dp</dimen>
+    <dimen name="instruction_bar_margin">2dp</dimen>
 </resources>
